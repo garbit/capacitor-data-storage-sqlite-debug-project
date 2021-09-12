@@ -65,11 +65,18 @@ export default defineComponent ({
           type: MediaFileType.IMAGE
         })
       }
-      console.log('fakeMediaObjects', fakeMediaObjects)
       // insert into db
       await store.dispatch(ACTIONS.INSERT_MEDIA_OBJECTS, fakeMediaObjects)
 
-      mediaObjects.value = fakeMediaObjects
+      console.log('fakeMediaObjects', fakeMediaObjects)
+      // insert into db
+      const files = await store.dispatch(ACTIONS.SELECT_ALL_MEDIA)
+      console.log('files', files.keysvalues)
+      files.keysvalues.map(async (f: any) => {
+        console.log('await store.dispatch(ACTIONS.GET_MEDIA, f.key)', await store.dispatch(ACTIONS.GET_MEDIA, f.key))
+        // console.log('f', f)
+      });
+
     })
 
     return {
